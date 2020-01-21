@@ -100,9 +100,10 @@ function SerialPort(path, options, openCallback) {
     options = {}
   }
 
-  const settings = { ...defaultSettings, ...options }
+//   const settings = { ...defaultSettings, ...options }
+    const settings = Object.assign({}, defaultSettings, options);
 
-  stream.Duplex.call(this, {
+    stream.Duplex.call(this, {
     highWaterMark: settings.highWaterMark,
   })
 
@@ -261,7 +262,8 @@ SerialPort.prototype.update = function(options, callback) {
     return this._asyncError(new Error('Port is not open'), callback)
   }
 
-  const settings = { ...defaultSettings, ...options }
+//   const settings = { ...defaultSettings, ...options }
+    const settings = Object.assign({}, defaultSettings, options);
   this.settings.baudRate = settings.baudRate
 
   debug('update', `baudRate: ${settings.baudRate}`)
